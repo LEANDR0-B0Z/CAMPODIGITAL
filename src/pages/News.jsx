@@ -5,8 +5,32 @@ import { Calendar, Clock, ArrowRight, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/components/ui/use-toast';
 
+// Importando as imagens locais
+import news1 from '@/assets/images/Safra de Soja 2024.png';
+import news2 from '@/assets/images/irrigacao.png';
+import news3 from '@/assets/images/MILHO.png';
+import news4 from '@/assets/images/planosafra.png';
+import news5 from '@/assets/images/trigoresistente.png';
+import news6 from '@/assets/images/exportacao.png';
+import placeholderImg from '@/assets/images/placeholder.png';
+
 const News = () => {
   const [news, setNews] = useState([]);
+
+  // Mapeamento de imagens para as notícias
+  const newsImages = {
+    1: news1,
+    2: news2,
+    3: news3,
+    4: news4,
+    5: news5,
+    6: news6,
+  };
+
+  // Função para obter a imagem com fallback
+  const getNewsImage = (id) => {
+    return newsImages[id] || placeholderImg;
+  };
 
   useEffect(() => {
     // Simular carregamento de notícias do localStorage
@@ -25,6 +49,7 @@ const News = () => {
           date: '2024-01-15',
           readTime: '5 min',
           featured: true,
+          image: 'news-1' // Referência para a imagem
         },
         {
           id: 2,
@@ -35,6 +60,7 @@ const News = () => {
           date: '2024-01-14',
           readTime: '3 min',
           featured: false,
+          image: 'news-2'
         },
         {
           id: 3,
@@ -45,6 +71,7 @@ const News = () => {
           date: '2024-01-13',
           readTime: '4 min',
           featured: false,
+          image: 'news-3'
         },
         {
           id: 4,
@@ -55,6 +82,7 @@ const News = () => {
           date: '2024-01-12',
           readTime: '6 min',
           featured: true,
+          image: 'news-4'
         },
         {
           id: 5,
@@ -65,16 +93,18 @@ const News = () => {
           date: '2024-01-11',
           readTime: '4 min',
           featured: false,
+          image: 'news-5'
         },
         {
           id: 6,
           title: 'Exportações do Agronegócio Crescem 12% no Primeiro Trimestre',
-          summary: 'Setor mantém trajetória de crescimento e consolida importância na balança comercial brasileira.',
+          summary: 'Setor mantem trajetória de crescimento e consolida importância na balança comercial brasileira.',
           content: 'As exportações do agronegócio brasileiro registraram...',
           category: 'Exportação',
           date: '2024-01-10',
           readTime: '5 min',
           featured: false,
+          image: 'news-6'
         },
       ];
       setNews(exampleNews);
@@ -124,7 +154,7 @@ const News = () => {
 
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <section className="gradient-bg py-16">
+        <section className="gradient-bg2 py-16 flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -166,12 +196,16 @@ const News = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: index * 0.2 }}
                       viewport={{ once: true }}
-                      className="news-card rounded-2xl overflow-hidden"
+                      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
                     >
                       <img  
                         className="w-full h-48 object-cover" 
                         alt={`Imagem da notícia: ${article.title}`}
-                       src="https://images.unsplash.com/photo-1614023968559-b20a484ec2be" />
+                        src={getNewsImage(article.id)}
+                        onError={(e) => {
+                          e.target.src = placeholderImg;
+                        }}
+                      />
                       
                       <div className="p-6">
                         <div className="flex items-center justify-between mb-4">
@@ -236,12 +270,16 @@ const News = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: index * 0.1 }}
                     viewport={{ once: true }}
-                    className="news-card rounded-xl overflow-hidden"
+                    className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow"
                   >
                     <img  
                       className="w-full h-40 object-cover" 
                       alt={`Imagem da notícia: ${article.title}`}
-                     src="https://images.unsplash.com/photo-1614023968559-b20a484ec2be" />
+                      src={getNewsImage(article.id)}
+                      onError={(e) => {
+                        e.target.src = placeholderImg;
+                      }}
+                    />
                     
                     <div className="p-5">
                       <div className="flex items-center justify-between mb-3">

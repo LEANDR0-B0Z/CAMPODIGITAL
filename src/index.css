@@ -38,8 +38,15 @@ body {
 }
 
 .gradient-bg {
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+  background: linear-gradient(135deg, #c5cec8 0%, #16a34a 50%, #15803d 100%);
 }
+.gradient-bg2 {
+            background-image: url('assets/images/pordosol.jpg'); /* O caminho da sua imagem */
+            background-size: cover; /* Ajusta a imagem para cobrir a área */
+            background-repeat: no-repeat; /* Evita a repetição da imagem */
+            background-position: center; /* Centraliza a imagem */
+            height: 500px; /* Dê um tamanho ao elemento */
+        }
 
 .glass-effect {
   background: rgba(255, 255, 255, 0.1);

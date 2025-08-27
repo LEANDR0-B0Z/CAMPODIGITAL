@@ -6,11 +6,30 @@ import { Search, Filter, Shield, Bug, Leaf } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
+// Importando as imagens locais
+import azoxystrobinImg from '@/assets/images/Azoxistrobina.png';
+import tebuconazoleImg from '@/assets/images/Tebuconazol.png';
+import mancozebImg from '@/assets/images/Mancozebe.png';
+import propiconazoleImg from '@/assets/images/Propiconazol.png';
+import carbendazimImg from '@/assets/images/Carbendazim.png';
+import imidaclopridImg from '@/assets/images/Imidacloprido.png';
+import lambdaCyhalothrinImg from '@/assets/images/Lambda-cialotrina.png';
+import chlorpyrifosImg from '@/assets/images/Clorpirifós.png';
+import thiamethoxamImg from '@/assets/images/Tiametoxam.png';
+import spinosadImg from '@/assets/images/Espinosade.png';
+import glyphosateImg from '@/assets/images/Glifosato.png';
+import twoFourDImg from '@/assets/images/2,4-D.png';
+import atrazineImg from '@/assets/images/Atrazina.png';
+import paraquatImg from '@/assets/images/Paraquate.png';
+import dicambaImg from '@/assets/images/Dicamba.png';
+import placeholderImg from '@/assets/images/PlaceHolder.png';
+
 const Catalog = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [viewMode, setViewMode] = useState('grid');
 
   const categories = [
     { id: 'all', name: 'Todos', icon: Leaf, color: 'text-green-600' },
@@ -18,6 +37,30 @@ const Catalog = () => {
     { id: 'inseticida', name: 'Inseticidas', icon: Bug, color: 'text-red-600' },
     { id: 'pesticida', name: 'Pesticidas', icon: Leaf, color: 'text-purple-600' },
   ];
+
+  // Mapeamento de imagens
+  const imageMap = {
+    'fungicide-azoxystrobin': azoxystrobinImg,
+    'fungicide-tebuconazole': tebuconazoleImg,
+    'fungicide-mancozeb': mancozebImg,
+    'fungicide-propiconazole': propiconazoleImg,
+    'fungicide-carbendazim': carbendazimImg,
+    'insecticide-imidacloprid': imidaclopridImg,
+    'insecticide-lambda-cyhalothrin': lambdaCyhalothrinImg,
+    'insecticide-chlorpyrifos': chlorpyrifosImg,
+    'insecticide-thiamethoxam': thiamethoxamImg,
+    'insecticide-spinosad': spinosadImg,
+    'herbicide-glyphosate': glyphosateImg,
+    'herbicide-2-4-d': twoFourDImg,
+    'herbicide-atrazine': atrazineImg,
+    'herbicide-paraquat': paraquatImg,
+    'herbicide-dicamba': dicambaImg,
+  };
+
+  // Função para obter a imagem com fallback
+  const getProductImage = (imageName) => {
+    return imageMap[imageName] || placeholderImg;
+  };
 
   useEffect(() => {
     // Simular carregamento de produtos do localStorage
@@ -230,16 +273,17 @@ const Catalog = () => {
         <meta property="og:description" content="Catálogo completo de defensivos agrícolas com informações técnicas detalhadas." />
       </Helmet>
 
+            
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <section className="gradient-bg py-16">
+        <section className="gradient-bg2 h-96 flex items-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="text-center text-white"
-            >
+              >
               <h1 className="text-4xl md:text-5xl font-bold mb-4">
                 Catálogo de Defensivos
               </h1>
@@ -254,7 +298,7 @@ const Catalog = () => {
         {/* Filters */}
         <section className="py-8 bg-white border-b">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row gap-6 items-center">
+            <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
               {/* Search */}
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -265,6 +309,27 @@ const Catalog = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="pl-10"
                 />
+              </div>
+
+              {/* View Mode Toggle */}
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-gray-600">Visualização:</span>
+                <Button 
+                  variant={viewMode === 'grid' ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setViewMode('grid')}
+                  className="p-2 h-9 w-9"
+                >
+                  <i className="fas fa-th"></i>
+                </Button>
+                <Button 
+                  variant={viewMode === 'list' ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                  className="p-2 h-9 w-9"
+                >
+                  <i className="fas fa-list"></i>
+                </Button>
               </div>
 
               {/* Category Filters */}
@@ -310,7 +375,7 @@ const Catalog = () => {
                   Tente ajustar os filtros ou termo de busca.
                 </p>
               </motion.div>
-            ) : (
+            ) : viewMode === 'grid' ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {filteredProducts.map((product, index) => {
                   const Icon = getCategoryIcon(product.category);
@@ -321,15 +386,19 @@ const Catalog = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: index * 0.1 }}
                       viewport={{ once: true }}
-                      className="product-card rounded-xl overflow-hidden"
+                      className="product-card bg-white rounded-xl overflow-hidden"
                     >
                       <div className="relative">
                         <img  
                           className="w-full h-48 object-cover" 
                           alt={`Produto ${product.name}`}
-                         src="https://images.unsplash.com/photo-1647458539895-d4e0be7bc464" />
+                          src={getProductImage(product.image)}
+                          onError={(e) => {
+                            e.target.src = placeholderImg;
+                          }}
+                        />
                         <div className="absolute top-3 right-3">
-                          <span className={`category-badge ${getCategoryColor(product.category)}`}>
+                          <span className={`px-3 py-1 text-xs font-semibold rounded-full category-badge ${getCategoryColor(product.category)}`}>
                             {product.category}
                           </span>
                         </div>
@@ -373,6 +442,87 @@ const Catalog = () => {
                         </div>
 
                         <Button asChild className="w-full gradient-bg text-white hover:opacity-90">
+                          <Link to={`/produto/${product.id}`}>
+                            Ver Detalhes
+                          </Link>
+                        </Button>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {filteredProducts.map((product, index) => {
+                  const Icon = getCategoryIcon(product.category);
+                  return (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, y: 50 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="product-card bg-white rounded-xl overflow-hidden flex flex-col md:flex-row"
+                    >
+                      <div className="md:w-1/4">
+                        <img  
+                          className="w-full h-48 md:h-full object-cover" 
+                          alt={`Produto ${product.name}`}
+                          src={getProductImage(product.image)}
+                          onError={(e) => {
+                            e.target.src = placeholderImg;
+                          }}
+                        />
+                      </div>
+                      <div className="p-5 md:w-3/4">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center">
+                            <Icon className="w-5 h-5 text-green-600 mr-2" />
+                            <h3 className="text-lg font-semibold text-gray-900">
+                              {product.name}
+                            </h3>
+                          </div>
+                          <span className={`px-3 py-1 text-xs font-semibold rounded-full category-badge ${getCategoryColor(product.category)}`}>
+                            {product.category}
+                          </span>
+                        </div>
+
+                        <p className="text-sm text-gray-600 mb-3">
+                          {product.description}
+                        </p>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                          <div>
+                            <div className="text-sm text-gray-500">
+                              <strong>Ingrediente Ativo:</strong> {product.activeIngredient}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              <strong>Dosagem:</strong> {product.dosage}
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-sm text-gray-500">
+                              <strong>Culturas:</strong>
+                            </div>
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              {product.crops.slice(0, 5).map((crop, idx) => (
+                                <span
+                                  key={idx}
+                                  className="px-2 py-1 bg-green-50 text-green-700 text-xs rounded-full"
+                                >
+                                  {crop}
+                                </span>
+                              ))}
+                              {product.crops.length > 5 && (
+                                <span className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">
+                                  +{product.crops.length - 5}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        <Button asChild className="gradient-bg text-white hover:opacity-90">
                           <Link to={`/produto/${product.id}`}>
                             Ver Detalhes
                           </Link>
