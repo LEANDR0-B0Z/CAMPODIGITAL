@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import News from './pages/News';
 import Catalog from './pages/Catalog';
+import Cotacao from './pages/Cotacao';
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/noticias" element={<News />} />
             <Route path="/catalogo" element={<Catalog />} />
+             <Route path="/cotacao" element={<Cotacao />} />
             <Route path="/produto/:id" element={<ProductDetail />} />
           </Routes>
         </main>

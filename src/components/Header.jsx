@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, Leaf, Newspaper, BookOpen } from 'lucide-react';
+import { Menu, X, Leaf, Newspaper, BookOpen, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+
+
+// aqui é os menu de navegação dos "3 pontinhos"
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
@@ -14,6 +17,11 @@ const Header = () => {
     name: 'Notícias',
     href: '/noticias',
     icon: Newspaper
+  },
+   {
+    name: 'Cotação',
+    href: '/cotacao',
+    icon: DollarSign
   }, {
     name: 'Catálogo',
     href: '/catalogo',

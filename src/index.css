@@ -93,3 +93,40 @@ body {
     radial-gradient(circle at 25% 25%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 75% 75%, rgba(22, 163, 74, 0.1) 0%, transparent 50%);
 }
+
+.button-icon-cotacao {
+  width: 8rem; /* w-32 */
+  height: 3.5rem; /* h-14 */
+  border-radius: 9px; /* rounded-[9px] */
+  font-weight: bold; /* font-bold */
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+/* cor normal (verde) */
+.button-icon-cotacao[data-variant="outline"] {
+  background-color: #16a34a; /* verde */
+  color: #fff; /* branco */
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1),
+              0 2px 4px -2px rgba(0,0,0,0.1); /* sombra */
+}
+
+.button-icon-cotacao[data-variant="outline"]:hover {
+  background-color: #15803d; /* verde mais escuro */
+  transform: scale(1.05); /* leve zoom */
+}
+
+/* cor quando selecionado (azul/verde destacado) */
+.button-icon-cotacao[data-variant="default"] {
+  background-color: #d31d17; /* azul/verde destaque */
+  color: #ba1b1b;
+  box-shadow: 0 10px 15px -3px rgba(34, 101, 27, 0.3),
+              0 4px 6px -4px rgba(133, 139, 150, 0.2);
+  transform: scale(10.1); /* aumenta um pouco */
+}
+
+/* aumenta o tamanho dos icones dentro do botao */
+.button-icon-cotacao svg,
+.button-icon-cotacao span:first-child {
+  width: 1.5rem; /* w-6 */
+  height: 1.5rem; /* h-6 */
+}
