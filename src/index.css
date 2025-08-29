@@ -130,3 +130,6 @@ body {
   width: 1.5rem; /* w-6 */
   height: 1.5rem; /* h-6 */
 }
+.margin-top {
+  margin-top: 210px;
+}

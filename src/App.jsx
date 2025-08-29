@@ -10,6 +10,8 @@ import Home from './pages/Home';
 import News from './pages/News';
 import Catalog from './pages/Catalog';
 import Cotacao from './pages/Cotacao';
+import IA from './pages/IA';
+import CriaIMG from './pages/CriaIMG';
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
             <Route path="/noticias" element={<News />} />
             <Route path="/catalogo" element={<Catalog />} />
              <Route path="/cotacao" element={<Cotacao />} />
+             <Route path="/CriaIMG" element={<CriaIMG />} />
+             <Route path="/IA" element={<IA />} />
             <Route path="/produto/:id" element={<ProductDetail />} />
           </Routes>
         </main>

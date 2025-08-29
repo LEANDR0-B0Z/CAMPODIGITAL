@@ -143,10 +143,10 @@ function IA() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="my-element bg-white rounded-xl shadow-lg p-6"
+            className="margin-top my-element bg-white rounded-xl shadow-lg p-6"
           >
             {/* Seção de upload de arquivos e câmera */}
-            <div className="mb-8 p-4 bg-gray-50 rounded-lg">
+            <div className=" mb-8 p-4 bg-gray-50 rounded-lg">
               <h2 className="text-lg font-semibold mb-4">Análise por Imagens</h2>
               
               <div className="flex flex-wrap gap-4 mb-4">

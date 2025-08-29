@@ -17,10 +17,18 @@ const Header = () => {
     name: 'Notícias',
     href: '/noticias',
     icon: Newspaper
+  }, {
+    name: 'IA',
+    href: '/IA',
+    icon: Newspaper
   },
    {
     name: 'Cotação',
     href: '/cotacao',
+    icon: DollarSign
+  }, {
+    name: 'CriaIMG',
+    href: '/CriaIMG',
     icon: DollarSign
   }, {
     name: 'Catálogo',

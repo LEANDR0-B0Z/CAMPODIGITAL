@@ -15,7 +15,7 @@ const CriaIMG = () => {
 
   return (
     <>
-      <Helmet>
+      <Helmet className="margin-top">
         <title>Layout de Imagens - AgroPortal</title>
         <meta name="description" content="Layout criativo com imagens para o AgroPortal" />
       </Helmet>
@@ -41,7 +41,7 @@ const CriaIMG = () => {
         </section>
 
         {/* Conteúdo Principal */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-32 relative z-10">
+        <div className="margin-top max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 -mt-32 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
